@@ -19,8 +19,8 @@ Introduction
 
 To use the plugin, you need :
 
-1. (http://www.karotz.com/register)[An account on the Karotz Platform].     
-2. (http://www.karotz.com/lab/home)[To create a new app]. See (http://dev.karotz.com/dev/register_app.html)[this] for help. Be carefull of the accesses you give to the app.     
+1. [An account on the Karotz Platform](http://www.karotz.com/register).     
+2. [To create a new app](http://www.karotz.com/lab/home). See [this](http://dev.karotz.com/dev/register_app.html) for help. Be carefull of the accesses you give to the app.     
 3. Write the API key and the Secret key of the app somewhere.    
 4. Load the app in your rabbit (Click the "Test!" button) and save the install ID.    
 
@@ -185,7 +185,7 @@ karotz.authentication(apikey, installid, secret, false, function(app){
 
 Listen at the given path.   
 Could be use to listen at the callback url of the Karotz's app.
-See [http://dev.karotz.com/dev/register_app.html#descriptor-xml](dev.karotz.com)
+See [dev.karotz.com](http://dev.karotz.com/dev/register_app.html#descriptor-xml)
 
 Use it with `karotz.multimedia()` and `karotz.webcam()`.
 
