@@ -1,4 +1,3 @@
-
 Karotz NodeJS Plugin
 ======================
 
@@ -20,20 +19,21 @@ Introduction
 
 To use the plugin, you need :
 
-1- [http://www.karotz.com/register](An account on the Karotz Platform).     
-2- [http://www.karotz.com/lab/home](To create a new app). See [http://dev.karotz.com/dev/register_app.html](this) for help. Be carefull of the accesses you give to the app.     
-3- Write the API key and the Secret key of the app somewhere.    
-4- Load the app in your rabbit (Click the "Test!" button) and save the install ID.    
+1. [http://www.karotz.com/register](An account on the Karotz Platform).     
+2. [http://www.karotz.com/lab/home](To create a new app). See [http://dev.karotz.com/dev/register_app.html](this) for help. Be carefull of the accesses you give to the app.     
+3. Write the API key and the Secret key of the app somewhere.    
+4. Load the app in your rabbit (Click the "Test!" button) and save the install ID.    
 
 
 Then, load the plugin :
-````
+
+```
 var karotz  = require('./karotz');
 
 var installid = '12345',
 	apikey    = '12345',
 	secret    = '12345';
-````
+```
 
 
 
@@ -44,7 +44,7 @@ You first need to authentificate your app to the Karotz Server. By doing this, t
 An interactiveID is only valid 15min. So if you need to control your rabbit for a long time, set the `permanent` params at `true` for the plugin to ask for a new interactiveID every 14min.
 
 
-````
+```
 var karotz  = require('./karotz');
 
 var installid = '12345',
@@ -66,14 +66,14 @@ karotz.authentication(apikey, installid, secret, true, function(app){
 
 }
 
-````
+```
 
 Parameters :
 
 - `apikey` : the apikey of your app
 - `installid` : the installid of your app
-- `secret' : the secret key of your app
-- `permanent' (boolean) : keep the connection alive or not ? If true, the plugin will ask for a new interactiveID every 14min.
+- `secret` : the secret key of your app
+- `permanent` (boolean) : keep the connection alive or not ? If true, the plugin will ask for a new interactiveID every 14min.
 - `next` : the function to execute after the connection.
 
 
@@ -87,7 +87,7 @@ Disconnect the Karotz.
 If you need to make other action with the Karotz after, you must re-authentificate the rabbit.
 
 
-````
+```
 karotz.authentication(apikey, installid, secret, false, function(app){
 	
 	//Some stuff
@@ -96,7 +96,7 @@ karotz.authentication(apikey, installid, secret, false, function(app){
 		console.log(app);
 	});
 }
-
+```
 
 Parameters :
 
@@ -112,13 +112,13 @@ Parameters :
 
 Make the rabbit sleeping (just led off and horizontal ears).
 
-````
+```
 ...
 
 karotz.sleep(function(karotz) {
 	console.log(karotz);
 });
-````
+```
 
 
 
@@ -128,13 +128,13 @@ karotz.sleep(function(karotz) {
 
 Wakeup the rabbit (he starts breathing).
 
-````
+```
 ...
 
 karotz.wakeUp(function(karotz) {
 	console.log(karotz);
 });
-````
+```
 
 
 
@@ -144,7 +144,7 @@ karotz.wakeUp(function(karotz) {
 
 Configure wake-up/sleep times and breathingLed.
 
-````
+```
 ...
 
 var sleep = [
@@ -174,7 +174,7 @@ karotz.authentication(apikey, installid, secret, false, function(app){
 	}):
 }
 
-````
+```
 
 
 
@@ -191,7 +191,7 @@ Use it with `karotz.multimedia()` and `karotz.webcam()`.
 
 You must listen to the `callback` event.
 
-````
+```
 ...
 
 var path = 'photo';
@@ -209,13 +209,13 @@ karotz.on('callback', function(req, res) {
 })
 
 
-````
+```
 
 Parameters :
 
-- url (string) : the url to listen
-- port (int) : the port
-- next : the function to chaine
+- `url` (string) : the url to listen
+- `port` (int) : the port
+- `next` : the function to chaine
 
 
 
@@ -236,7 +236,7 @@ Control the ears !
 Each ear have 16 positions to make a loop.
 
 
-````
+```
 ...
 
 /* 
@@ -258,9 +258,9 @@ karotz.ears(left, right, false, false, function(msg) {
 	console.log(msg); //Output 'Move' or 'Error'
 })
 
-````
+```
 
-````
+```
 ...
 
 //reset to top
@@ -269,15 +269,15 @@ karotz.ears(false, false, false, true, function(msg) {
 	console.log(msg); 
 })
 
-````
+```
 
 Parameters :
 
-- left (int) : the left ear
-- right (int) : the right ear
-- relative (boolean) : is move is relative to current position ?
-- reset : reset the ears
-- next : function to chain
+- `left` (int) : the left ear
+- `right` (int) : the right ear
+- `relative` (boolean) : is move is relative to current position ?
+- `reset` : reset the ears
+- `next` : function to chain
 
 
 
@@ -289,7 +289,7 @@ Control the led !
 
 * Light *
 
-````
+```
 ...
 
 //Led just change color
@@ -303,11 +303,11 @@ karotz.led(
 		console.log(msg);
 	} 
 );
-````
+```
 
 * Fade *
 
-````
+```
 ...
 
 //Will fade from red to orange in 10 sec
@@ -333,13 +333,13 @@ karotz.led(
 
 
 
-````
+```
 
 
 * Pulse *
 
 
-````
+```
 ...
 
 //Will blink red/white during 10 sec, then light red
@@ -365,10 +365,11 @@ karotz.led(
 );
 
 
-````
+```
 
 * Off *
-````
+
+```
 ...
 
 karotz.led(
@@ -380,14 +381,14 @@ karotz.led(
 		console.log(msg);
 	} 
 );
-````
+```
 
 
 Parameters :
 
-- action (string) : action to do (pulse, fade or light)
-- object (object) : Objet containing the params according to http://dev.karotz.com/api/#Led
-- next : function to chain
+- `action` (string) : action to do (pulse, fade or light)
+- `object` (object) : Objet containing the params according to http://dev.karotz.com/api/#Led
+- `next` : function to chain
 
 
 
@@ -398,7 +399,7 @@ Parameters :
 And your Karotz speaks !
 
 
-````
+```
 ...
 
 //Say "I want a carrot"
@@ -406,9 +407,9 @@ And your Karotz speaks !
 karotz.tts('speak', 'EN', "I want a carrot !", function(msg) {
 	console.log(msg); //Output 'Speaking' or 'Error'
 });
-````
+```
 
-````
+```
 ...
 
 //Stop speaking
@@ -416,14 +417,14 @@ karotz.tts('speak', 'EN', "I want a carrot !", function(msg) {
 karotz.tts('stop', function(msg) {
 	console.log(msg);
 });
-````
+```
 
 Parameters :
 
-- action (string) : action to do (speak or stop)
-- lang (string) : lang (EN, FR, ...)
-- text (string) : the text to speech
-- next : function to chain
+- `action` (string) : action to do (speak or stop)
+- `lang` (string) : lang (EN, FR, ...)
+- `text` (string) : the text to speech
+- `next` : function to chain
 
 
 
@@ -433,17 +434,17 @@ Parameters :
 
 Play and manage songs.
 
-````
+```
 karotz.multimedia('play', 'http://somesite/somemp3.mp3', function(msg){
 	console.log(msg); //Output 'OK', 'Error'
 });
-````
+```
 
 Parameters :
 
-- action (string) : action to do (play, pause, resume, stop, previous, next, record (may not work), allsong, folder, artist, genre, playlist)
-- url (string) : If action is "play", url of the song or path in the USB. If action is record, url to post the record (see karotz.callback() ).
-- next : function to chain
+- `action` (string) : action to do (play, pause, resume, stop, previous, next, record (may not work), allsong, folder, artist, genre, playlist)
+- `url` (string) : If action is "play", url of the song or path in the USB. If action is record, url to post the record (see karotz.callback() ).
+- `next` : function to chain
 
 
 
@@ -455,9 +456,9 @@ Take a picture / a video (MJPEG stream).
 
 For a video : can be displayed in a html page with `<img src="http://api.karotz.com/api/karotz/webcam?action=video&interactiveid=1234567890 />`
 
-- action (string) : action to do (photo or video)
-- url (string) : if action is photo, the url the post the picture. (see karotz.callback() )
-- next : function to chain
+- `action` (string) : action to do (photo or video)
+- `url` (string) : if action is photo, the url the post the picture. (see karotz.callback() )
+- `next` : function to chain
 
 
 
@@ -467,14 +468,14 @@ For a video : can be displayed in a html page with `<img src="http://api.karotz.
 
 Return some Karotz config.
 
-````
+```
 karotz.configuration(function(config) {
 	console.log(config); //'Error' or config object
 })
-````
+```
 
 Parameters :
 
-- next : function to chain
+- `next` : function to chain
 
 
