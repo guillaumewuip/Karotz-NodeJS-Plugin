@@ -19,8 +19,8 @@ Introduction
 
 To use the plugin, you need :
 
-1. [http://www.karotz.com/register](An account on the Karotz Platform).     
-2. [http://www.karotz.com/lab/home](To create a new app). See [http://dev.karotz.com/dev/register_app.html](this) for help. Be carefull of the accesses you give to the app.     
+1. (http://www.karotz.com/register)[An account on the Karotz Platform].     
+2. (http://www.karotz.com/lab/home)[To create a new app]. See (http://dev.karotz.com/dev/register_app.html)[this] for help. Be carefull of the accesses you give to the app.     
 3. Write the API key and the Secret key of the app somewhere.    
 4. Load the app in your rabbit (Click the "Test!" button) and save the install ID.    
 
