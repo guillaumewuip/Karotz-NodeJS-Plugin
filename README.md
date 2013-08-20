@@ -39,7 +39,8 @@ var installid = '12345',
 
 
 
-#karotz.authentification(apikey, installid, secret, permanent, next)
+### karotz.authentification(apikey, installid, secret, permanent, next)
+
 You first need to authentificate your app to the Karotz Server. By doing this, the plugin receive an interactiveID from the Karotz Server.    
 An interactiveID is only valid 15min. So if you need to control your rabbit for a long time, set the `permanent` params at `true` for the plugin to ask for a new interactiveID every 14min.
 
@@ -81,7 +82,7 @@ Parameters :
 
 
 
-#karotz.stop(stopPermanent, next)
+### karotz.stop(stopPermanent, next)
 
 Disconnect the Karotz.    
 If you need to make other action with the Karotz after, you must re-authentificate the rabbit.
@@ -108,7 +109,7 @@ Parameters :
 
 
 
-#karotz.sleep(next)
+### karotz.sleep(next)
 
 Make the rabbit sleeping (just led off and horizontal ears).
 
@@ -124,7 +125,7 @@ karotz.sleep(function(karotz) {
 
 
 
-#karotz.wakeup(next)
+### karotz.wakeup(next)
 
 Wakeup the rabbit (he starts breathing).
 
@@ -140,7 +141,7 @@ karotz.wakeUp(function(karotz) {
 
 
 
-#karotz.config(sleepTimes, breathingLed, next)
+### karotz.config(sleepTimes, breathingLed, next)
 
 Configure wake-up/sleep times and breathingLed.
 
@@ -181,7 +182,7 @@ karotz.authentication(apikey, installid, secret, false, function(app){
 
 
 
-#karotz.callback(path, port, next)
+### karotz.callback(path, port, next)
 
 Listen at the given path.   
 Could be use to listen at the callback url of the Karotz's app.
@@ -229,7 +230,7 @@ Let's play !
 
 
 
-#karotz.ears(left, right, relative, reset, next)
+### karotz.ears(left, right, relative, reset, next)
 
 Control the ears !
 
@@ -283,7 +284,7 @@ Parameters :
 
 
 
-#karotz.led(action, object, next)
+### karotz.led(action, object, next)
 
 Control the led !
 
@@ -394,7 +395,7 @@ Parameters :
 
 
 
-#karotz.tts(action, lang, text, next)
+### karotz.tts(action, lang, text, next)
 
 And your Karotz speaks !
 
@@ -430,7 +431,7 @@ Parameters :
 
 
 
-#karotz.multimedia(action, url, next)
+### karotz.multimedia(action, url, next)
 
 Play and manage songs.
 
@@ -449,7 +450,7 @@ Parameters :
 
 
 
-#karotz.webcam(action, url, next)
+### karotz.webcam(action, url, next)
 
 
 Take a picture / a video (MJPEG stream).
@@ -464,7 +465,7 @@ For a video : can be displayed in a html page with `<img src="http://api.karotz.
 
 
 
-#karotz.configuration(next)
+### karotz.configuration(next)
 
 Return some Karotz config.
 
