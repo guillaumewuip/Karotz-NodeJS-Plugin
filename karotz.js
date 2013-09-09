@@ -24,7 +24,7 @@ var app = {
 };
 
 var karotz = {
-	isSleeping     : false,
+	isSleeping     : true,
 	sleepTimes     : {},
 
 	breathingLed : "FFFFFF",
@@ -85,36 +85,48 @@ function authentication(apikey, installid, secret, permanent, next) {
 
 	request(url, function (error, response, body) {
 
-		parseString(body, function (err, result) {
+		if(typeof body == 'undefined') {
+			if(next) next("Error");
+		} 
+		else { 
+			parseString(body, function (err, result) {
 
-		    if(
-		    	!err 
-		    	&& typeof result.VoosMsg.response == 'undefined' 
-		    	&& typeof result.VoosMsg.interactiveMode != "undefined"
-		    	)
-		    {
-		    	var interactiveMode = result.VoosMsg.interactiveMode[0];
+			    if(
+			    	!err 
+			    	&& typeof result.VoosMsg.response == 'undefined' 
+			    	&& typeof result.VoosMsg.interactiveMode != "undefined"
+			    	)
+			    { 
+			    	var interactiveMode = result.VoosMsg.interactiveMode[0];
 
-		    	app.interactiveid = interactiveMode.interactiveId[0];
-		    	app.configId      = interactiveMode.configId[0];
-		    	app.access        = interactiveMode.access;
+			    	app.interactiveid = interactiveMode.interactiveId[0];
+			    	app.configId      = interactiveMode.configId[0];
+			    	app.access        = interactiveMode.access;
 
-		    	app.status = 'connected';
+			    	app.status = 'connected';
 
-		    	controller.emit('connected', app);	
+			    	controller.emit('connected', app);	
 
-		    	if(next) next(app);
-		    }
-		    else
-		    {
+			    	if(karotz.isSleeping) {
+						sleep();
+					}
+					else {
+						breath();
+					}
 
-		    	app.status        = 'disconnected';
-		    	app.configId      = '';
-		    	app.interactiveid = '';
+			    	if(next) next(app);
+			    }
+			    else
+			    {
 
-		    	if(next) next("Error. Can't connect the rabbit.");
-		    }
-		});
+			    	app.status        = 'disconnected';
+			    	app.configId      = '';
+			    	app.interactiveid = '';
+						
+			    	if(next) next("Error. Can't connect the rabbit.");
+			    }
+			});
+		}
 
 		//the module authentificate the app every 14 min
 		if(permanent) {
@@ -164,28 +176,33 @@ function stop (stopPermanent, next) {
 
 	request(url, function (error, response, body) {
 
-		parseString(body, function (err, result) {
+		if(typeof body == 'undefined') {
+			if(next) next("Error");
+		} 
+		else {
+			parseString(body, function (err, result) {
 
-		    if(
-		    	!err
-		    	&& typeof result.VoosMsg.response != "undefined"
-		    	&& result.VoosMsg.response[0].code[0] == "OK"
-		    	)
-		    {
+			    if(
+			    	!err
+			    	&& typeof result.VoosMsg.response != "undefined"
+			    	&& result.VoosMsg.response[0].code[0] == "OK"
+			    	)
+			    {
 
-		    	app.status        = 'disconnected';
-		    	app.configId      = '';
-		    	app.interactiveid = '';
+			    	app.status        = 'disconnected';
+			    	app.configId      = '';
+			    	app.interactiveid = '';
 
-		    	controller.emit('disconnected', app);
+			    	controller.emit('disconnected', app);
 
-		    	if(next) next(app);
-		    }
-		    else
-		    {
-		    	if(next) next("Error. No stop confirm received.");
-		    }
-		});
+			    	if(next) next(app);
+			    }
+			    else
+			    {
+			    	if(next) next("Error. No stop confirm received.");
+			    }
+			});
+		}
 
 	});
 
@@ -364,9 +381,9 @@ function breath(next) {
 			 		pulse : 6480000 //duration of the blinking
 				},
 				function (msg) {
-					ears(false, false, false, true, function (msg) {
-						if (next) next(karotz);
-					});
+					// ears(false, false, false, true, function (msg) {
+					// 	if (next) next(karotz);
+					// });
 				}
 			);
 		}
@@ -462,22 +479,27 @@ function ears (left, right, relative, reset, next) {
 
 	request(url, function (error, response, body) {
 
-		parseString(body, function (err, result) {
+		if(typeof body == 'undefined') {
+			if(next) next("Error");
+		} 
+		else {
+			parseString(body, function (err, result) {
 
-		    if(
-		    	!err
-		    	&& typeof result.VoosMsg.response != "undefined"
-		    	&& result.VoosMsg.response[0].code[0] == "OK"
-		    	)
-		    {
+			    if(
+			    	!err
+			    	&& typeof result.VoosMsg.response != "undefined"
+			    	&& result.VoosMsg.response[0].code[0] == "OK"
+			    	)
+			    {
 
-		    	if(next) next("Move");
-		    }
-		    else
-		    {
-		    	if(next) next("Error");
-		    }
-		});
+			    	if(next) next("Move");
+			    }
+			    else
+			    {
+			    	if(next) next("Error");
+			    }
+			});
+		}
 
 	});
 
