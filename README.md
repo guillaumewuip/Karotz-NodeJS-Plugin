@@ -288,7 +288,7 @@ Parameters :
 
 Control the led !
 
-* Light *
+* Light
 
 ```
 ...
@@ -306,7 +306,7 @@ karotz.led(
 );
 ```
 
-* Fade *
+* Fade
 
 ```
 ...
@@ -337,7 +337,7 @@ karotz.led(
 ```
 
 
-* Pulse *
+* Pulse
 
 
 ```
@@ -368,7 +368,7 @@ karotz.led(
 
 ```
 
-* Off *
+* Off
 
 ```
 ...
