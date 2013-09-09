@@ -480,3 +480,43 @@ Parameters :
 - `next` : function to chain
 
 
+
+Events
+---------
+
+
+You could listen to some events :
+
+- `connected`
+- `disconnected`
+- `callback`
+- `sleep`
+- `wakeup`
+
+
+````
+karotz.on('connected', function(app) {
+	console.log("Karotz connected !");
+});
+
+karotz.on('disconnected', function(app) {
+	console.log("Karotz disconnected !");
+});
+
+karotz.on('callback', function(req, res) {
+	console.log("Callback :");
+	console.log(req);
+	console.log(res);
+});
+
+karotz.on('sleep', function(karotz) {
+	console.log("Karotz is sleeping.");
+});
+
+karotz.on('wakeUp', function(karotz) {
+	console.log("Karotz is awake.");
+});
+
+
+````
+
