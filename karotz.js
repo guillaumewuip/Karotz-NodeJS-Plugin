@@ -11,7 +11,7 @@ var express      = require('express')(),
 	cronJob      = require('cron').CronJob,
 	Repeat       = require('repeat');
 
-controller = new EventEmitter();
+var controller = new EventEmitter();
 
 
 var app = {
@@ -326,13 +326,19 @@ function sleep(next) {
 			color : '000000', //Off
 		},
 		function (msg) {
-			ears(9, 10, false, false, function (msg) {
-				if (next) next(karotz);
-			});
+
+			// ears(9, 10, false, false, function (msg) {
+			// 	if (next) next(karotz);
+			// });
+			// 
+			// Make to mutch noise ^^'
 		}
 	);
 
 	controller.emit('sleep', karotz);
+
+	if(next) next("sleep");
+
 }
 
 controller.sleep = function(next) {
@@ -352,6 +358,8 @@ function wakeUp(next) {
 	breath();
 
 	controller.emit('wakeUp', karotz);	
+
+	if(next) next("wakeUp");
 
 }
 
