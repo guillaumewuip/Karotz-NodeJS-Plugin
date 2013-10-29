@@ -27,7 +27,7 @@ To use the plugin, you need :
 
 Then, load the plugin :
 
-```
+```javascript
 var karotz  = require('./karotz');
 
 var installid = '12345',
@@ -45,7 +45,8 @@ You first need to authentificate your app to the Karotz Server. By doing this, t
 An interactiveID is only valid 15min. So if you need to control your rabbit for a long time, set the `permanent` params at `true` for the plugin to ask for a new interactiveID every 14min.
 
 
-```
+```javascript
+
 var karotz  = require('./karotz');
 
 var installid = '12345',
@@ -88,7 +89,7 @@ Disconnect the Karotz.
 If you need to make other action with the Karotz after, you must re-authentificate the rabbit.
 
 
-```
+```javascript
 karotz.authentication(apikey, installid, secret, false, function(app){
 	
 	//Some stuff
@@ -113,7 +114,7 @@ Parameters :
 
 Make the rabbit sleeping (just led off and horizontal ears).
 
-```
+```javascript
 ...
 
 karotz.sleep(function(karotz) {
@@ -129,7 +130,7 @@ karotz.sleep(function(karotz) {
 
 Wakeup the rabbit (he starts breathing).
 
-```
+```javascript
 ...
 
 karotz.wakeUp(function(karotz) {
@@ -145,7 +146,7 @@ karotz.wakeUp(function(karotz) {
 
 Configure wake-up/sleep times and breathingLed.
 
-```
+```javascript
 ...
 
 var sleep = [
@@ -192,7 +193,7 @@ Use it with `karotz.multimedia()` and `karotz.webcam()`.
 
 You must listen to the `callback` event.
 
-```
+```javascript
 ...
 
 var path = 'photo';
@@ -237,7 +238,7 @@ Control the ears !
 Each ear have 16 positions to make a loop.
 
 
-```
+```javascript
 ...
 
 /* 
@@ -261,7 +262,7 @@ karotz.ears(left, right, false, false, function(msg) {
 
 ```
 
-```
+```javascript
 ...
 
 //reset to top
@@ -290,7 +291,7 @@ Control the led !
 
 * Light
 
-```
+```javascript
 ...
 
 //Led just change color
@@ -308,7 +309,7 @@ karotz.led(
 
 * Fade
 
-```
+```javascript
 ...
 
 //Will fade from red to orange in 10 sec
@@ -340,7 +341,7 @@ karotz.led(
 * Pulse
 
 
-```
+```javascript
 ...
 
 //Will blink red/white during 10 sec, then light red
@@ -370,7 +371,7 @@ karotz.led(
 
 * Off
 
-```
+```javascript
 ...
 
 karotz.led(
@@ -400,7 +401,7 @@ Parameters :
 And your Karotz speaks !
 
 
-```
+```javascript
 ...
 
 //Say "I want a carrot"
@@ -410,7 +411,7 @@ karotz.tts('speak', 'EN', "I want a carrot !", function(msg) {
 });
 ```
 
-```
+```javascript
 ...
 
 //Stop speaking
@@ -435,7 +436,7 @@ Parameters :
 
 Play and manage songs.
 
-```
+```javascript
 karotz.multimedia('play', 'http://somesite/somemp3.mp3', function(msg){
 	console.log(msg); //Output 'OK', 'Error'
 });
@@ -469,7 +470,7 @@ For a video : can be displayed in a html page with `<img src="http://api.karotz.
 
 Return some Karotz config.
 
-```
+```javascript
 karotz.configuration(function(config) {
 	console.log(config); //'Error' or config object
 })
@@ -494,7 +495,7 @@ You could listen to some events :
 - `wakeup`
 
 
-````
+````javascript
 karotz.on('connected', function(app) {
 	console.log("Karotz connected !");
 });

@@ -29,6 +29,12 @@ var karotz = {
 
 	breathingLed : "FFFFFF",
 
+	led : {
+		type  : '', //light, fade, pulse
+		color : '', //RGB color,
+		period: 0, //period for 'pulse' and 'fade'
+ 		pulse : 0, //pulse for 'pulse'
+	}
 }
 
 var cron = [];
@@ -111,7 +117,47 @@ function authentication(apikey, installid, secret, permanent, next) {
 						sleep();
 					}
 					else {
-						breath();
+
+						//We update the led as it was after authentification
+
+						var action = karotz.led.type || false;
+
+						switch(action) {
+							
+							case 'fade' :
+								var params = {
+									color  : karotz.led.color,
+									period : karotz.led.period
+								}
+								break;
+
+							case 'pulse' :
+								var params = {
+									color  : karotz.led.color,
+									pulse  : karotz.led.pulse,
+									period : karotz.led.period
+								}
+								break;
+
+							case 'light' :
+								var params = {
+									color : karotz.led.color
+								}
+								break;
+
+							default : break;
+						}
+
+						led(
+							'light',
+							{
+								color : '000000', //Off
+							},
+							function () {
+								if(action) 
+									led(action, params);
+							}
+						);
 					}
 
 			    	if(next) next(app);
@@ -137,17 +183,7 @@ function authentication(apikey, installid, secret, permanent, next) {
 				console.log("Boucle à " + myDate.getHours() + ":" + myDate.getMinutes() +":"+ myDate.getSeconds());
 
 				stop(false, function () {
-					authentication(apikey, installid, secret, false, function(app) {
-
-						if(karotz.isSleeping) {
-							sleep();
-						}
-						else {
-							breath();
-						}
-						
-
-					});
+					authentication(apikey, installid, secret, false);
 				});
 			}
 
@@ -270,8 +306,9 @@ function config(sleepTimes, breathingLed, next){
 				if(wakeUpDate.getTime() < myDate.getTime() && myDate.getTime() < sleepDate.getTime()) {
 					if(karotz.isSleeping) {
 						wakeUp();
+					} else {
+						breath();
 					}
-					breath();
 				} else {
 					if(!karotz.isSleeping) {
 						sleep();
@@ -591,8 +628,17 @@ function led (action, objet, next) {
 		}
 	}
 
+
+	karotz.led = {
+		type  : params.action,
+		color : params.color,
+		period: ((typeof params.period != undefined) ? params.period : null),
+ 		pulse : ((typeof params.pulse != undefined) ? params.pulse : null),
+	};
+
+	//console.log(query);
+
 	//Url
-	
 	var url = 'http://api.karotz.com/api/karotz/led?'+query;
 
 	request(url, function (error, response, body) {
@@ -611,6 +657,28 @@ function led (action, objet, next) {
 			    {
 
 			    	if(next) next("Led set");
+
+			    	//We update the state after the end of the pulse / the fade
+			    	if(action == 'fade') {
+			    		setTimeout(function() {
+			    			karotz.led = {
+								type  : 'light',
+								color : params.color,
+								period: 0,
+						 		pulse : 0,
+							};
+			    		}, params.period);
+			    	} else if(action == 'pulse') {
+			    		setTimeout(function() {
+			    			karotz.led = {
+								type  : 'light',
+								color : params.color,
+								period: 0,
+						 		pulse : 0,
+						 	};
+			    		}, params.pulse);
+			    	}
+
 			    }
 			    else
 			    {
