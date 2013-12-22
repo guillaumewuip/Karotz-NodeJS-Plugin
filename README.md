@@ -20,7 +20,7 @@ To use the plugin, you need :
 Then, load the plugin :
 
 ```javascript
-var karotz  = require('./karotz');
+var karotz  = require('karotz');
 
 var installid = '12345',
 	apikey    = '12345',
