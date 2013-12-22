@@ -3,27 +3,19 @@ Karotz NodeJS Plugin
 
 A NodeJS Plugin to control your rabbit !
 
-
-
-
-
-
-
-
 Introduction
 -------------
 
+First of all, you need to install the plugin by using npm :
 
-
-
+    $ npm install karotz
 
 To use the plugin, you need :
 
-1. [An account on the Karotz Platform](http://www.karotz.com/register).     
-2. [To create a new app](http://www.karotz.com/lab/home). See [this](http://dev.karotz.com/dev/register_app.html) for help. Be carefull of the accesses you give to the app.     
-3. Write the API key and the Secret key of the app somewhere.    
-4. Load the app in your rabbit (Click the "Test!" button) and save the install ID.    
-
+1. [An account on the Karotz Platform](http://www.karotz.com/register).
+2. [To create a new app](http://www.karotz.com/lab/home). See [this](http://dev.karotz.com/dev/register_app.html) for help. Be carefull of the accesses you give to the app.
+3. Write the API key and the Secret key of the app somewhere.
+4. Load the app in your rabbit (Click the "Test!" button) and save the install ID.
 
 Then, load the plugin :
 
@@ -35,15 +27,10 @@ var installid = '12345',
 	secret    = '12345';
 ```
 
-
-
-
-
 ### karotz.authentification(apikey, installid, secret, permanent, next)
 
-You first need to authentificate your app to the Karotz Server. By doing this, the plugin receive an interactiveID from the Karotz Server.    
+You first need to authentificate your app to the Karotz Server. By doing this, the plugin receive an interactiveID from the Karotz Server.
 An interactiveID is only valid 15min. So if you need to control your rabbit for a long time, set the `permanent` params at `true` for the plugin to ask for a new interactiveID every 14min.
-
 
 ```javascript
 
@@ -62,8 +49,8 @@ karotz.authentication(apikey, installid, secret, true, function(app){
 	 *		access        : {...}, //all the accesses of the app
 	 *		status        : 'connected' //'connected' or 'disconnected'
 	 *	}
-	 */	
-	
+	 */
+
 	console.log(app);
 
 }
@@ -85,13 +72,13 @@ Parameters :
 
 ### karotz.stop(stopPermanent, next)
 
-Disconnect the Karotz.    
+Disconnect the Karotz.
 If you need to make other action with the Karotz after, you must re-authentificate the rabbit.
 
 
 ```javascript
 karotz.authentication(apikey, installid, secret, false, function(app){
-	
+
 	//Some stuff
 
 	karotz.stop(false, function(app){
@@ -162,7 +149,7 @@ var sleep = [
 var breathingLed = "2222FF";
 
 karotz.authentication(apikey, installid, secret, false, function(app){
-	
+
 	karotz.config(sleepTimes, breathingLed, function(karotz) {
 
 		/** Output object {
@@ -171,7 +158,7 @@ karotz.authentication(apikey, installid, secret, false, function(app){
 		 *	breathingLed : "FFFFFF",
 		 * }
 		 */
-		
+
 		console.log(karotz);
 	}):
 }
@@ -185,7 +172,7 @@ karotz.authentication(apikey, installid, secret, false, function(app){
 
 ### karotz.callback(path, port, next)
 
-Listen at the given path.   
+Listen at the given path.
 Could be use to listen at the callback url of the Karotz's app.
 See [dev.karotz.com](http://dev.karotz.com/dev/register_app.html#descriptor-xml)
 
@@ -241,7 +228,7 @@ Each ear have 16 positions to make a loop.
 ```javascript
 ...
 
-/* 
+/*
  * Make something like that :
  *
  *			|
@@ -268,7 +255,7 @@ karotz.ears(left, right, false, false, function(msg) {
 //reset to top
 
 karotz.ears(false, false, false, true, function(msg) {
-	console.log(msg); 
+	console.log(msg);
 })
 
 ```
@@ -303,7 +290,7 @@ karotz.led(
 	},
 	function(msg) {
 		console.log(msg);
-	} 
+	}
 );
 ```
 
@@ -328,9 +315,9 @@ karotz.led(
 			},
 			function(msg) {
 				console.log(msg);
-			} 
+			}
 		);
-	} 
+	}
 );
 
 
@@ -361,9 +348,9 @@ karotz.led(
 			},
 			function(msg) {
 				console.log(msg);
-			} 
+			}
 		);
-	} 
+	}
 );
 
 
@@ -381,7 +368,7 @@ karotz.led(
 	},
 	function(msg) {
 		console.log(msg);
-	} 
+	}
 );
 ```
 
