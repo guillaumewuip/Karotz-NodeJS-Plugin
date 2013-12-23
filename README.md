@@ -27,10 +27,12 @@ var installid = '12345',
 	secret    = '12345';
 ```
 
-### karotz.authentification(apikey, installid, secret, permanent, next)
+### karotz.authentication(apikey, installid, secret, permanent, next)
 
-You first need to authentificate your app to the Karotz Server. By doing this, the plugin receive an interactiveID from the Karotz Server.
+You first need to authenticate your app to the Karotz Server. By doing this, the plugin receive an interactiveID from the Karotz Server.
 An interactiveID is only valid 15min. So if you need to control your rabbit for a long time, set the `permanent` params at `true` for the plugin to ask for a new interactiveID every 14min.
+
+Morevover, the plugin remember the last state of the led.
 
 ```javascript
 
@@ -73,7 +75,7 @@ Parameters :
 ### karotz.stop(stopPermanent, next)
 
 Disconnect the Karotz.
-If you need to make other action with the Karotz after, you must re-authentificate the rabbit.
+If you need to make other action with the Karotz after, you must re-authenticate the rabbit.
 
 
 ```javascript
@@ -89,7 +91,7 @@ karotz.authentication(apikey, installid, secret, false, function(app){
 
 Parameters :
 
-- `stoPermanent` : stop the loop of authentification
+- `stoPermanent` : stop the loop of authentication
 - `next` : the function to execute after the connection.
 
 
@@ -171,6 +173,8 @@ karotz.authentication(apikey, installid, secret, false, function(app){
 
 
 ### karotz.callback(path, port, next)
+
+*Experimental*
 
 Listen at the given path.
 Could be use to listen at the callback url of the Karotz's app.
@@ -475,9 +479,11 @@ Events
 
 You could listen to some events :
 
+- `loop` : emit when the plugin re-authenticate the Karotz in permanent mode
+- 'errWithServers' : the rabbit is unreachable (try to unplug it a moment)
 - `connected`
 - `disconnected`
-- `callback`
+- `callback` : the server received a callback
 - `sleep`
 - `wakeup`
 
