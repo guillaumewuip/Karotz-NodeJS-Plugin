@@ -17,6 +17,8 @@ To use the plugin, you need :
 3. Write the API key and the Secret key of the app somewhere.
 4. Load the app in your rabbit (Click the "Test!" button) and save the install ID.
 
+For the whole explanation, see the [wiki page](https://github.com/guillaumewuip/Karotz-NodeJS-Plugin/wiki).
+
 Then, load the plugin :
 
 ```javascript
