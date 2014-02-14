@@ -1,6 +1,6 @@
 {
   "name": "karotz",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Node.js module to control your Karotz.",
   "author": "Guillaume Wuip <clochard.guillaume@gmail.com> (http://wuips.com/guillaume/)",
   "contributors": [
@@ -11,11 +11,11 @@
   ],
   "main": "./lib/karotz.js",
   "dependencies": {
-    "cron": "1.0.1",
-    "express": "3.4.7",
+    "cron": "~1.0.1",
+    "express": "~3.4.7",
     "repeat": "0.0.6",
     "request": "2.30.0",
-    "xml2js": "0.4.0"
+    "xml2js": "~0.4.0"
   },
   "repository": {
     "type": "git",
